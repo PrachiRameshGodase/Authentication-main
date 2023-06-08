@@ -23,16 +23,13 @@ const ProfileForm = () => {
         // "Authorization":"Bearer abc"
 
       }
-    }).then(res=>{
-      //always suceed!
-
     })
   }
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
         <label htmlFor='new-password'>New Password</label>
-        <input type='password' id='new-password' minLength="7" />
+        <input type='password' id='new-password' minLength="7" ref={newPasswordInputRef}/>
       </div>
       <div className={classes.action}>
         <button>Change Password</button>
