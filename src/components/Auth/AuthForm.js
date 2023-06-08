@@ -18,38 +18,48 @@ const AuthForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     console.log(enteredEmail, enteredPassword);
     setisLoading(true)
+    let url;
     if (isLogin) {
+      url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCrvxx1b9lxm0hnaJJG7VOrZRvV68VtiRo"
     } else {
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCrvxx1b9lxm0hnaJJG7VOrZRvV68VtiRo",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((response) => {
-        setisLoading(false)
-        if (response.ok) {
-        } else {
-          //The response holds error
-          return response.json().then((data) => {
-            // console.log(data);
-            let errorMessage="Authencation failed!";
-            // if(data && data.error && data.error.message){
-            //   errorMessage=data.error.message 
-            // }
-            alert(errorMessage);
-          });
-        }
-      });
+      url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCrvxx1b9lxm0hnaJJG7VOrZRvV68VtiRo"
+
     }
-  };
+    fetch(url,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
+      setisLoading(false)
+      if (response.ok) {
+        return response.json()
+      } else {
+        //The response holds error
+        return response.json().then((data) => {
+          // console.log(data);
+          let errorMessage="Authencation failed!";
+          // if(data && data.error && data.error.message){
+          //   errorMessage=data.error.message 
+          // }
+          // alert(errorMessage);
+          throw new Error(errorMessage)
+        });
+      }
+    }).then(data=>{
+      console.log(data)
+    }).catch(err=>{
+      alert(err.message);
+    })
+  }
+  
 
   return (
     <section className={classes.auth}>
