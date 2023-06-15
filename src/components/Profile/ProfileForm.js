@@ -12,7 +12,7 @@ const ProfileForm = () => {
     event.preventDefault();
     const enteredNewPassword=newPasswordInputRef.current.value;
     //add validation
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCrvxx1b9lxm0hnaJJG7VOrZRvV68VtiRo"
+    fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyC_YTVdPU09w4fVfXZCN4aaCuAu4j_Pcro"
     ,{
       method:"POST",
       body:JSON.stringify({

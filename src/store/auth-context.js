@@ -30,7 +30,7 @@ export const AuthContextProvider=(props)=>{
           console.log('You have been logged out');
           localStorage.removeItem('token');
           setToken(null); // Update the token state to reflect logout
-        },2000)
+        },200000)
       }
       useEffect(()=>{
         autoLogoutHandler();

@@ -9,15 +9,24 @@ import AuthContext from './store/auth-context';
 
 function App() {
   const authCtx=useContext(AuthContext)
+
+  // const rtHandler=()=>{
+  //   console.log(authCtx.isLoggedIn)
+  // }
   return (
+    <React.Fragment>
     <Layout>
       <Routes>
         <Route path='/' element={<HomePage />} />
         {!authCtx.isLoggedIn &&<Route path='/auth' element={<AuthPage />} />}
         {authCtx.isLoggedIn && <Route path='/profile' element={<UserProfile />} />}
+        <Route />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      {/* <button onClick={rtHandler}>prachi</button> */}
     </Layout>
+    {/* <button onClick={rtHandler}>Rough</button> */}
+    </React.Fragment>
   );
 }
 
